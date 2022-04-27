@@ -14,7 +14,7 @@ void* foo(void* gelenPointer){
   int bellektekiDeger = *intPtr;
   printf("thread çalışıyor. %d sn bekleyecek\n", bellektekiDeger);
 
-  //bu yukarıdaki 3 satır aşağıdaki yerine
+  //bu yukarıdaki 3 satır yerine aşağıdaki
   //1 satır kullanılabilirdi.
   //printf("thread çalışıyor. %d sn bekleyecek\n", *((int *)gelenPointer));
   
