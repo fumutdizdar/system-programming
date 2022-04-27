@@ -1,29 +1,29 @@
 #include <unistd.h>
 int main(void)
 {
-    pid_t pid;
+    pid_t pid; //process idsi
     pid = fork();
-    // After the command above, now we have two processes
-    // that share the same code and keeps running under this line
+    //Bu satır ile artık iki ayrı iş parçacığı (process)
+    //oluşmuştur. Birisi parent birisi de child.
+    //ikisi de aşağıdaki kodları çalıştırarak devam edecek.
     
-    //so is this the child process or parent
-    if(pid == 0){
-        //this is child
+    //iyi de, o zaman burası parent mi, child mi?
+    if(pid == 0){ //pid değeri 0 ise childdır.
         printf("Child>>Hi, I am child with pid=%d\n", getpid() );
         sleep(3);
         printf("Child>>Ok I am done..\n");
     }
     
-    if(pid > 0){
-        //this is parent
+    if(pid > 0){ //processid 0 dan farklı ise parent processtir.
         printf("I am parent and will wait until that bastard %d finishes\n", pid);
         int status;
         wait(&status);
-        //that status code carries the real return code but it
-        //starts from the 8th bit of status value
-        //so we must shift it to right 8 times
+        //status değişkeni gerçek geri dönüş değerini tutuyor
+        //ama bizim exit ile gönderdiğimiz sayı, 8.bitten itibaren tutuluyor
+        //o yüzden 8 kez sağa kaydırıyoruz.
         printf("Finally, the child died %d", status>>8);         
     }
-    //well right now the parent and child uses the same exit code
+    //Bu geri dönüş kodunu hem parent hem de child kullanıyor.
+    //yani child da geri dönerken 50, parent da çıkışta 50 değeri üretiyor
     exit(50);
 }
